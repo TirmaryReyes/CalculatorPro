@@ -1,0 +1,72 @@
+function dataEntered() {
+  let firstMessage = prompt(
+    'Please enter the number or numbers separated by spaces.'
+  );
+  if (firstMessage === null) {
+    return null;
+  }
+
+  let numbersList = firstMessage.split(' ');
+  numbersList = numbersList.map(x => parseFloat(x));
+  let invalidNumbers = numbersList.filter(x => isNaN(x));
+  if (invalidNumbers.length) {
+    return (secondMessage = prompt(
+      `⛔️You can't do this operation!, Only numbers are allowed.Try again please.`
+    ));
+    
+  }
+  return numbersList;
+}
+
+const calculatorPro = (...arguments) => {
+  let result = [];
+
+  if (arguments.length === 1) {
+    return `The square root ${arguments[0]} is: ${Number(
+      Math.sqrt(arguments[0]).toFixed(3)
+    )}`;
+  }
+  let addition = arguments.reduce(
+    (acc, item) => parseFloat((+acc + +item).toFixed(3)),
+    0
+  );
+  result.push(`The result of your addition is: ${addition}`);
+
+  let subtraction = arguments.reduce((acc, item) =>
+    parseFloat((acc - item).toFixed(3), 0)
+  );
+  result.push(`The result of your subtration is: ${subtraction}`);
+  let multiplication = arguments.reduce(
+    (acc, item) => parseFloat((acc * item).toFixed(3)),
+    1
+  );
+  result.push(`The result of your multiplication is: ${multiplication}`);
+  if (arguments.includes(0)) {
+    result.push(`Can't divide by zero`);
+  } else {
+    let divition = arguments.reduce((acc, item) =>
+      parseFloat((acc / item).toFixed(3), 1)
+    );
+    result.push(`The result of your division is: ${divition}`);
+  }
+  return result.join('\n');
+};
+
+const enteredData = dataEntered();
+if (enteredData === null) {
+  console.log('Bye!');
+} else {
+  console.log(calculatorPro(...enteredData));
+}
+
+const anotherOperation = () => {
+  let question = prompt(` \u{1F603} Do you try another operation? yes/no`);
+  if (question === 'yes') {
+    const newEnteredData = dataEntered();
+    return calculatorPro(...newEnteredData);
+  } else {
+    question === 'no';
+    return 'Thank you, bye!';
+  }
+};
+console.log(anotherOperation());
