@@ -70,7 +70,8 @@ const calculator = () => {
       if (question === 'no') {
         console.log('Thank you, bye!');
       } else {
-        console.log('You have canceled the operation!');
+        alert('⛔️Sorry! You need to introduce "yes" or "no"');
+        return anotherOperation();
       }
     };
     anotherOperation();
